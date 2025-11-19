@@ -1,15 +1,8 @@
 import tkinter as tk
 from tkinter import ttk
-
+import streamlit as st
 from PIL import Image, ImageTk
 
-item1_img = Image.open("item1.jpg")
-item1_img = item1_img.resize((60, 60))
-item1_photo = ImageTk.PhotoImage(item1_img)
-
-item2_img = Image.open("item2.jpg")
-item2_img = item2_img.resize((60, 60))
-item2_photo = ImageTk.PhotoImage(item2_img)
 
 root = tk.Tk()
 root.attributes('-fullscreen', True)
