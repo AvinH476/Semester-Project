@@ -1,0 +1,108 @@
+import tkinter as tk
+from tkinter import ttk
+import streamlit as st
+from PIL import Image, ImageTk
+import subprocess
+
+
+root = tk.Tk()
+root.attributes('-fullscreen', True)
+
+style = ttk.Style()
+style.theme_use("clam")
+
+
+def exit_fullscreen(event=None):
+    root.attributes('-fullscreen', False)
+
+
+root.bind('<Escape>', exit_fullscreen)
+
+root.title("Account")
+
+bg_color = "#808080"
+fg_color = "#FFFFFF"
+accent_color = "#3B82F6"
+
+root.configure(bg=bg_color)
+
+style.configure(
+    "Main.TFrame",
+    background=bg_color,
+)
+
+style.configure(
+    "Title.TLabel",
+    background=bg_color,
+    foreground=fg_color,
+    font=("Calibri", 20, "bold")
+)
+
+style.configure(
+    "TButton",
+    font=("Calibri", 12),
+    foreground=fg_color,
+    background=accent_color,
+    padding=6,
+
+)
+
+style.configure(
+    "TCombobox",
+    fieldbackground="#1F2933",
+    background="#1F2933",
+    foreground=fg_color,)
+
+
+def show_account_screen(loginpage):
+    button2 = ttk.Button(root, text="Exit", width=5, command=lambda: (exit_button_click(root)))
+    button2.place(x=1060, y=5)
+
+
+def exit_button_click(window):
+    window.destroy()
+
+def open_PROJECT():
+    subprocess.Popen(["python", "PROJECT.py"])
+
+
+label = ttk.Label(root, text="Account", font=("Arial", 18))
+label.place(x=5, y=5)
+
+button = ttk.Button(root, text="Main Page", command=open_PROJECT)
+button.place(x=950, y=5)
+
+style = ttk.Style(root)
+style.configure('TButton', font=('Arial', 12), foreground='blue')
+
+combo = ttk.Combobox(root, values=["Option 1", "Option 2", "Option 3"])
+combo.pack(pady=30)
+
+exit_button = ttk.Button(root, text="Exit", width=5, command=lambda: exit_button_click(root))
+exit_button.place(x=1450, y=5)
+
+login = ttk.Label(root, text="Log In", font=("Arial", 15))
+login.place(x=720, y=170)
+name = ttk.Label(root, text="Username", font=("Arial", 9))
+name.place(x=719, y=220)
+name_Box = tk.Text(width=25, height=1)
+name_Box.place(x=650, y=240)
+
+password = ttk.Label(root, text="Password", font=("Arial", 9))
+password.place(x=719, y=320)
+pw_Box = tk.Text(width=25, height=1)
+pw_Box.place(x=650, y=340)
+
+new = ttk.Label(root, text="Create Account", font=("Arial", 9))
+new.place(x=710, y=420)
+
+combo.set("Select an option")
+
+
+def on_combobox_selected(event):
+    selected_value = combo.get()
+    print(f"Selected: {selected_value}")
+
+
+combo.bind("<<ComboboxSelected>>", on_combobox_selected)
+root.mainloop()
