@@ -2,6 +2,7 @@ import tkinter as tk
 from tkinter import ttk
 import streamlit as st
 from PIL import Image, ImageTk
+import subprocess
 
 
 root = tk.Tk()
@@ -20,9 +21,8 @@ root.bind('<Escape>', exit_fullscreen)
 root.title("Main Page")
 
 bg_color = "#808080"
-fg_color = "#E5E7EB"
+fg_color = "#FFFFFF"
 accent_color = "#3B82F6"
-accent_hover = "#2563EB"
 
 root.configure(bg=bg_color)
 
@@ -35,20 +35,16 @@ style.configure(
     "Title.TLabel",
     background=bg_color,
     foreground=fg_color,
-    font=("Segoe UI", 20, "bold")
+    font=("Calibri", 20, "bold")
 )
 
 style.configure(
     "TButton",
-    font=("Segoe UI", 12),
+    font=("Calibri", 12),
     foreground=fg_color,
     background=accent_color,
     padding=6,
-)
 
-style.map(
-    "TButton",
-    background=[("active", accent_hover)],
 )
 
 style.configure(
@@ -66,11 +62,17 @@ def show_account_screen(loginpage):
 def exit_button_click(window):
     window.destroy()
 
+def open_ACCOUNT():
+    subprocess.Popen(["python", "ACCOUNT.py"])
+
+def open_XBOX():
+    subprocess.Popen(["python", "XBOX.py"])
+
 
 label = ttk.Label(root, text="Shopping Main Page", font=("Arial", 18))
 label.place(x=5, y=5)
 
-button = ttk.Button(root, text="Account", command=lambda: (show_account_screen(loginpage)))
+button = ttk.Button(root, text="Account", command=open_ACCOUNT)
 button.place(x=950, y=5)
 
 style = ttk.Style(root)
@@ -82,17 +84,51 @@ combo.pack(pady=30)
 exit_button = ttk.Button(root, text="Exit", width=5, command=lambda: exit_button_click(root))
 exit_button.place(x=1450, y=5)
 
-item1 = ttk.Label(root, text="Item", font=("Arial", 12))
-item1.place(x=50, y=80)
+item1 = ttk.Label(root, text="Xbox One X 1 TB Console", font=("Arial", 12))
+item1.place(x=200, y=95)
+item1price = ttk.Label(root, text="$299.99    NEW IN STORES", font=("Arial", 12))
+item1price.place(x=200, y=135)
 
-item1button = ttk.Button(root, text="Details", command=lambda:())
-item1button.place(x=105, y=80)
+item1button = ttk.Button(root, text="Details", command=open_XBOX)
+item1button.place(x=500, y=90)
 
-item2 = ttk.Label(root, text="Item 2", font=("Arial", 12))
-item2.place(x=50, y=140)
+img = Image.open("xbox pic.jpg")
+img = img.resize((100, 100))
+img_tk = ImageTk.PhotoImage(img)
+item1_pic = ttk.Label(root, image=img_tk)
+item1_pic.image = img_tk
+item1_pic.place(x=50, y=80)
+
+item2 = ttk.Label(root, text="Nintendo Wii Console (Black Edition)", font=("Arial", 12))
+item2.place(x=200, y=240)
+item2price = ttk.Label(root, text="$119.99    NEW", font=("Arial", 12))
+item2price.place(x=200, y=290)
 
 item2button = ttk.Button(root, text="Details", command=lambda:())
-item2button.place(x=105, y=140)
+item2button.place(x=500, y=240)
+
+img = Image.open("wii pic2.jpg")
+img = img.resize((100, 100))
+img_tk = ImageTk.PhotoImage(img)
+item2_pic = ttk.Label(root, image=img_tk)
+item2_pic.image = img_tk
+item2_pic.place(x=50, y=200)
+
+
+item3 = ttk.Label(root, text="32 INCH    FLAT SCREEN TV", font=("Arial", 12))
+item3.place(x=200, y=375)
+item3price = ttk.Label(root, text="799.99    NEW AT BESTBUY", font=("Arial", 12))
+item3price.place(x=200, y=415)
+
+item3button = ttk.Button(root, text="Details", command=lambda:())
+item3button.place(x=500, y=390)
+
+img = Image.open("tv pic.jpg")
+img = img.resize((100, 100))
+img_tk = ImageTk.PhotoImage(img)
+item3_pic = ttk.Label(root, image=img_tk)
+item3_pic.image = img_tk
+item3_pic.place(x=50, y=355)
 
 combo.set("Select an option")
 
